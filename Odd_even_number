@@ -1,0 +1,64 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+</head>
+<body>
+
+	<%!	/* 선언문 */
+	public int Sum()  /* 홀수의 합 구하는 Sum 메소드 */
+	{
+		int Sum_Add_Number = 0 ; /* 초기값 */
+		
+		for ( int i = 0 ; i < 11 ; i ++)
+		{
+			if ( i % 2 == 1)
+			{
+				Sum_Add_Number += i ; /* 홀수 일 경우 초기값에 더해줌 */
+			}
+		}
+		
+		return Sum_Add_Number;
+		
+	}
+	
+	public int Even_Number()  /* 짝수의 곱을 구하는 메소드 */
+	{
+
+		int count = 1 ;  /* while 문 조건 */
+		int Multi_Even = 1 ; /* 초기 조건 */ 
+		
+		while(count < 11) /* 1~10 까지 */
+		{
+			
+			
+			if (count % 2 == 0)
+			{
+				
+				Multi_Even *=count; /* 짝수 일 경우 초기값에 곱해줌 */
+				
+			}
+			count ++ ; /*count의 값을 1씩 증가시켜줌  */
+		
+			
+		}
+		
+		return Multi_Even;
+		
+	}
+	%>
+	
+	<% /* 스크리트릿*/
+ 		String str = "1번) 1부터 10사이의 홀수의 합 구하기 ";
+ 		String str2 = "2번) 1부터 10사이의 짝수의 곱 구하기 ";
+	%>
+	<!-- 결과값 출력  -->
+	<%=str%><br>
+	결과 : <span style = "color : red"><%=Sum()%></span><br>
+	<%=str2%><br>
+	결과 : <span style = "color : red"><%=Even_Number()%></span>
+</body>
+</html>
