@@ -1,0 +1,138 @@
+# Practice_jsp
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>주문하기</title>
+
+
+</head>
+
+<script type="text/javascript">
+
+	function All_check()  /*submit 되기전 조건들 체크  */
+
+	{
+		theform = document.form1; /* form1의 HTML문서를 theform 변수에 저장 */
+
+		if (theform.user_id.value == "") { /*아이디 입력란이 공백일 경우*/
+			alert("이름 입력해주세요"); /*확인창 이벤트*/
+			return theform.user_id.focus(); /*다시 아이디 입력란에 포커스 */
+		}
+
+		if (theform.user_ps.value == "") { /* 비밀번호 입력란이 공백일 경우 */
+			alert("비밀번호 입력해주세요"); /*확인창 이벤트*/
+			return theform.user_ps.focus(); /*비밀번호 입력란에 포커스*/
+		}
+
+		if (theform.user_Ad.value == "") { /*배달주소 입력란이 공백일 경우 */
+			alert("배달 주소 입력해주세요"); /*확인창 이벤트*/
+			return theform.user_Ad.focus(); /*배달 주소입력란에 포커스 */
+		}
+
+		if (theform.user_Ph.value == "") { /* 전화번호 입력란이 공백일 경우 */
+			alert("전화번호 입력해주세요"); /*확인창 이벤트*/
+			return theform.user_Ph.focus(); /*전화번호 입력란에 포커스*/
+		}
+		
+		var ck = false; /* ck라는 변수에 false저장*/
+	    
+	    var menu_ch = document.getElementsByName("menu"); /*name의 이름이 menu라는 HTML내에 있는 이름을 가져와서 menu_ch변수에 저장*/
+		
+	    
+		for(var i = 0 ; i <menu_ch.length ; i ++) /*체크박스의 확인*/
+		{
+			if(menu_ch[i].checked==true)
+			{
+				ck = true;
+				break;
+			}
+		}
+		
+		if (!ck) /*체크박스의 선택이 없을 경우 */
+		{
+			alert("메뉴를 선택해주세요");
+			
+			return false; /*false 리턴 */
+			
+		}
+		
+		 theform.submit(); /* 모든 조건들이 if문에 안걸리고 (즉, 조건확인이 다 된다면) submit 한다 */
+	}
+	
+	function side() /*사이드메뉴 라디오버튼의 클릭 이벤트를 할 경우의 펀션("선택")*/
+	{
+		var side_chk = document.getElementById("sidemenu"); /*sidemenu의 id값을 가져와서 변수에 저장 */ 
+	  	var menu = document.getElementById("side_menu"); /*side_menu의 id값을 가져와서 변수에 저장 */
+	 	menu.innerHTML = "<select name='drink'> <option value='콜라'>콜라 2000원 </option> <option value='스프라이트'>스프라이트 2000원 </option> </select>" 
+	 	/* drink라는 select 창을 만들어 주고 value의 값으로 "콜라","스프라이트"를 주고 , 스프라이트에 selected 조건을 줌으로써 초기화면이 스프라이트 보여진다.*/
+	} 
+	function side2()  /*사이드메뉴의 라디오버튼의 클릭 이벤트를 할 경우의 펀션 ("선택안함")*/
+	{ 
+		var side_chk = document.getElementById("sidemenu");  /*sidemenu의 id값을 가져와서 변수에 저장 */
+		var menu = document.getElementById("side_menu");  /*side_menu의 id값을 가져와서 변수에 저장*/
+		menu.innerHTML = ""; /* side()펀션과 달리 이 펀션에서는 select창이 있으면 안되므로 menu.innerHTML의 값을 공백으로 준다.*/
+	}
+	
+	function re_ck() /*취소 눌렀을 경우의 이벤트 */
+	{
+		var ch = confirm("주문 취소하겠습니까??")
+		
+		if (ch==true)
+		{
+			document.form1.reset(); /* 조건식을 만족할 경우 form1 전체 리셋 */
+		}
+		if(ch==false)
+		{
+			return false;
+		}
+		
+		
+	}
+	
+
+	
+</script>
+
+
+<body onload ="document.getElementById('user_id').focus();"> <!--초기 화면창에 user_id에 포커스를 준다 ( 맨 위에 값 , 입력을 편하게 하기 위해 ) -->
+
+	<form name="form1" id="form1" action = "Lab5-1-result.jsp" method = "POST" > <!-- form의 이름과 id의 값은 form1로 주고 , post방식으로 Lab5-1-result.jsp 파일로 submit -->
+
+		<h1>주문하기</h1>
+
+		이름 : <input type="text" id="user_id" name="user_id"><br> <!-- 이름 입력창 -->
+		비밀번호 : <input type="password" id="user_ps" name="user_ps"><br> <!-- 비밀번호 입력창 , 비밀번호이기 때문에 type = password로 주었다. -->
+		배달 주소 : <input type="text" id="user_Ad" name="user_Ad"><br> <!-- 배달주소 입력창 -->
+		전화번호 : <input type="text" id="user_Ph" name="user_Ph"><br> <!-- 전화번호 입력창 -->
+
+		<hr>
+
+		<h3>메인 메뉴</h3>
+
+	
+		<input type="checkbox" value="불고기버거" id="menu" name="menu">불고기버거 4,000원  <!-- 체크박스 타입 , value의 값은 request.getParameterValues로 받을 때 문자열 배열로 받아줄것이기 때문에 "불고기버거"직접입력,name은 "menu"로 통일 , 체크박스의 값들을 가져올 때 통일된 name의 value들을 가져올 것이기 때문 -->
+		<input type="checkbox" value="양념치킨" id="menu" name="menu">양념 치킨 16,000원 <!-- 체크박스 타입 , value의 값은 request.getParameterValues로 받을 때 문자열 배열로 받아줄것이기 때문에 "양념치킨"직접입력,name은 "menu"로 통일 , 체크박스의 값들을 가져올 때 통일된 name의 value들을 가져올 것이기 때문 -->
+		<input type="checkbox" value="후라이드치킨" id="menu" name="menu">후라이드 치킨 16,000원 <!-- 체크박스 타입 , value의 값은 request.getParameterValues로 받을 때 문자열 배열로 받아줄것이기 때문에 "후라이드치킨"직접입력,name은 "menu"로 통일 , 체크박스의 값들을 가져올 때 통일된 name의 value들을 가져올 것이기 때문 -->
+		<input type="checkbox" value="반반치킨" id="menu" name="menu">반반치킨 17,000원<!-- 체크박스 타입 , value의 값은 request.getParameterValues로 받을 때 문자열 배열로 받아줄것이기 때문에 "반반치킨"직접입력,name은 "menu"로 통일 , 체크박스의 값들을 가져올 때 통일된 name의 value들을 가져올 것이기 때문 -->
+		
+		
+		<hr>
+
+		<h2>사이드메뉴</h2>
+		<br> 선택  <input type="radio" name="sidemenu" id="sidemenu" value="ok" onclick = "side()">  <!-- 선택의 라디오 버튼 , 클릭 시 side 펀션 발생 -->
+		        선택 안함 <input type="radio" name="sidemenu" id="sidemenu" value="no" onclick = "side2()" checked > <!-- 선택안함의 라디오 버튼 , 초기값으로 고정 , 클릭시 side2 펀션 발생 -->
+		<p>
+		<div id="side_menu"></div> 
+		<p>
+			<input type="button" value="주문" onclick="All_check()">  <!-- 주문 클릭 하였을 경우 All_check() 실행 -->
+			<input type="button" value="취소" onclick ="re_ck()"> <!-- 리셋 버튼  --><p>
+
+	</form>
+</body>
+
+</html>
