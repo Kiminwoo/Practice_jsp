@@ -1,0 +1,48 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8");
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>결과</title>
+<style>
+	
+
+</style>
+</head>
+<body>
+
+<% 
+	String a = request.getParameter("name_number"); /* 입력한 숫자 가져옴 */
+	int b = Integer.parseInt(a); /*  가져온 숫자를 int형으로 바꿈*/
+	String color= ""; /* red,green 분류 하기 위해 */
+	String number_ch =""; /*짝수,홀수 구분 위해 */
+	String front = ""; /*  ( 추가 위해 */
+	String Back  = ""; /* ) 추가 위해 */
+	if (b % 2== 0) /*짝수 조건  */
+	{
+		color ="red";
+		number_ch ="(짝수)";
+	}
+	else if (b % 2 == 1) /* 홀수 조건  */
+	{
+		color = "green";
+		number_ch ="(홀수)";
+		front = "(";
+		Back = ")";
+		
+	}
+%>
+
+
+<span style="color:blue"><%=request.getParameter("name_id")%></span>님이 입력한 값은<!-- 아이디 파랑 고정 -->
+<span style="color:<%=color%>"> <!-- 색깔분류 --> 
+<%=front%><%=request.getParameter("name_number")%><%=Back%> <!-- (숫자)짝수or홀수 출력 -->
+<%=number_ch%>
+</span>
+입니다.
+
+</body>
+</html>
