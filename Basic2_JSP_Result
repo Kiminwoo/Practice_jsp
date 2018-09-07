@@ -1,0 +1,32 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" import="java.sql.Timestamp"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Example2_Result</title>
+</head>
+<body>
+<%request.setCharacterEncoding("UTF-8");%>
+<!-- 값들을 받아올 때 Encoding 설정 ( UTF-8 ) 로 -->
+
+<!-- 값들을 받아 올 것인데 , 이 때 useBean사용  -->
+<jsp:useBean id="ex2" class="Example.Example2" scope="page">
+<!-- Example패키지내에 있는 Example2클래스를 ex2로 id값 설정 scope=현재 페이지에 내에서 존재 -->
+<jsp:setProperty name ="ex2" property ="*" />
+<!-- ex2 로써 값들을 받아온 파라미터로 대입 -->
+</jsp:useBean>
+
+<% ex2.setReg_date(new Timestamp(System.currentTimeMillis()));%>
+<!--  ex2에 현재 시간을 저장 -->
+<h1>수강신청결과</h1>
+
+<hr>
+이름 : <jsp:getProperty name="ex2" property="std_id"/><br>
+<!-- 위에서 저장 시켜놓은 값들을 불러올 것인데 , name= ex2 위에서 선언해 주었기 때문에 , 학번을 불러올 것이다. -->
+수강과목 : <jsp:getProperty property="classname" name="ex2"/><br>
+<!-- classname 을 불러올 것이다 , 수강과목을 의미 -->
+수강등록 시간 <jsp:getProperty property="reg_date" name="ex2"/><br>
+<!-- 수강등록 시간을 불러올 것이다 , reg_date -->
+</body>
+</html>
