@@ -1,0 +1,70 @@
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
+    import ="java.text.DecimalFormat"
+    %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1> 결과  </h1>
+<% 
+	request.setCharacterEncoding("UTF-8");
+	//받아오는 값을 UTF-8로 Encoding한다.
+	String name = request.getParameter("name");
+	// 이름을 받아온다
+	String dept = request.getParameter("dept");
+	// 라디오 버튼의 결과값을 받아온다.
+	String number = request.getParameter("number");
+	// 학번을 받아온다.
+	double score = Double.parseDouble(request.getParameter("score"));
+	// 학점을 받아온다.
+	double class_score = Double.parseDouble(request.getParameter("class_score"));
+	// 만점선택을 받아온다.
+	DecimalFormat format = new DecimalFormat();
+	// 반올림 해주는 클래스 
+	format.applyLocalizedPattern("0.##");
+	// 2번째 자리까지 표현 , 반올림 까지 해줌.
+
+/* DecimalFormat 클래스는 format 메소드를 사용하여 특정 패턴으로 값을 포맷할 수 있다. (반환 값 String)
+
+
+
+
+DecimalFormat 클래스는 format 메소드를 사용하여 특정 패턴으로 값을 포맷할 수 있다. (반환 값 String)
+
+
+
+지정할 수 있는 패턴 형식은 '0' 과 '#'을 사용 하여 지정한다.
+
+
+
+예를 들어, '0.###', '000.###', '00.#' 등으로 패턴을 지정할 수 잇다.
+
+
+
+'0' 은 해당 자리수는 값이 최소한으로 있어야 되며, #은 최대한 해당 소수점 자리수 까지(반올림하여) 보여준다.
+
+ */
+
+	String change_1 = format.format(score * 4.5/ class_score);
+	String change_2 = format.format(score * 4.3/ class_score);
+	String change_3 = format.format(score * 4.0/ class_score);
+	
+	out.print("이름 : "+name+"<br>");
+	out.print("학번 : "+number+"<br>");
+	out.print("학과 : "+dept+"<br>");
+	out.print("학점 : "+score+"/"+class_score+"<br>");
+%>
+
+<h3>학점 변환 결과</h3>
+<%=change_1%> /4.5만점<br>
+<%=change_2%> /4.3만점<br>
+<%=change_3%> /4.0만점<br>
+
+</body>
+</html>
