@@ -1,0 +1,40 @@
+package Example;
+import java.sql.Timestamp;
+public class Example2 {
+	private String std_id; // 학번 
+	private String [] class_name; //  과목들의 String 배열
+	private String classname; // 과목
+	private Timestamp Reg_date; // 현재시간
+	public String getStd_id() {
+		return std_id;
+	}
+	public void setStd_id(String std_id) {
+		this.std_id = std_id;
+	}
+	public String[] getClass_name() {
+		return class_name;
+	}
+	public void setClass_name(String[] class_name) {
+		this.class_name = class_name;
+	}
+	public String getClassname() { 
+		classname =""; // 과목명 임시로 공백 
+		
+		for(int i=0; i<this.class_name.length; i++)  //체크박스이므로 , 배열로써 각각을 저장시켜 줄 것이다.
+		{
+			classname += this.class_name[i] + " "; // 배열의 값들을 String 형 classname에 저장 , 이어 주는 문장이기 때문에 "," 설정
+		}
+		return classname;
+	}
+	public void setClassname(String classname) {
+		this.classname = classname;
+	}
+	public Timestamp getReg_date() {
+		return Reg_date;
+	}
+	public void setReg_date(Timestamp reg_date) {
+		Reg_date = reg_date;
+	}
+	
+}
+
